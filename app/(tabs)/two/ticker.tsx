@@ -1,36 +1,30 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import TickerList from '@/components/Ticker/TickerList';
+import { Button, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
 
-interface TickerProps {
-  value: number;
-}
+import Ticker from '@/components/Ticker';
 
-const Ticker: React.FC<TickerProps> = ({ value = 12345 }) => {
-  const splittedValue = value.toString().split('');
+const TickerScreen = () => {
+  const [value, setValue] = useState(12345);
   return (
-    <View>
-      <View style={styles.innerContainer}>
-        {splittedValue.map((number, index) => {
-          return (
-            <TickerList
-              index={index}
-              number={number}
-              key={`tick-item-${number}-index-${index}`}
-            />
-          );
-        })}
-      </View>
+    <View style={[styles.container]}>
+      <Ticker value={value} isCurrency />
+      <Button
+        title='random value'
+        onPress={() =>
+          setValue(Math.floor(Math.random() * 100000000000) + 0.99)
+        }
+      />
     </View>
   );
 };
 
-// TODO continue https://www.youtube.com/watch?v=Rv91NdVtnsw&t=29s 6:28
-export default Ticker;
+export default TickerScreen;
 
 const styles = StyleSheet.create({
-  innerContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
 });

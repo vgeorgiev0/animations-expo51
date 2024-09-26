@@ -2,10 +2,27 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { TextProps } from '../Themed';
 
-interface TickProps extends TextProps {}
+interface TickProps extends TextProps {
+  fontSize: number;
+}
 
-const Tick: React.FC<TickProps> = ({ children, ...rest }) => {
-  return <Text {...rest}>{children}</Text>;
+const Tick: React.FC<TickProps> = ({ children, fontSize, style, ...rest }) => {
+  return (
+    <Text
+      style={[
+        style,
+        {
+          fontSize: fontSize,
+          lineHeight: fontSize * 1.1,
+          fontVariant: ['tabular-nums'],
+          fontWeight: '900',
+        },
+      ]}
+      {...rest}
+    >
+      {children}
+    </Text>
+  );
 };
 
 export default Tick;
