@@ -49,6 +49,13 @@ export default function TabLayout() {
           title: 'Leader board',
         }}
       />
+      <Drawer.Screen
+        name='phone-ring'
+        options={{
+          drawerLabel: 'Phone Ring',
+          title: 'Phone Ring',
+        }}
+      />
     </Drawer>
   );
 }
