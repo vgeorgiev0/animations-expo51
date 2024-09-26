@@ -10,9 +10,7 @@ const TickerScreen = () => {
       <Ticker value={value} isCurrency />
       <Button
         title='random value'
-        onPress={() =>
-          setValue(Math.floor(Math.random() * 100000000000) + 0.99)
-        }
+        onPress={() => setValue(Math.floor(Math.random() * 100000000000))}
       />
     </View>
   );

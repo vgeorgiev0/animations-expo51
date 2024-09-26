@@ -50,7 +50,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name='two'
+        name='drawer'
         options={{
           title: 'Drawer',
           tabBarIcon: ({ color, focused }) => {

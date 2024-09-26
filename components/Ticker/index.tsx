@@ -38,7 +38,7 @@ const Ticker: React.FC<TickerProps> = ({
   return (
     <View>
       <Tick
-        style={{ position: 'absolute', top: 10000000000, left: 10000000000 }}
+        style={{ position: 'absolute', top: -1000000 }}
         onTextLayout={(e) => {
           setAdjustedFontSize(e.nativeEvent.lines[0].ascender);
         }}
