@@ -42,6 +42,13 @@ export default function TabLayout() {
           title: 'Moti',
         }}
       />
+      <Drawer.Screen
+        name='leaderboard'
+        options={{
+          drawerLabel: 'Leader board',
+          title: 'Leader board',
+        }}
+      />
     </Drawer>
   );
 }
