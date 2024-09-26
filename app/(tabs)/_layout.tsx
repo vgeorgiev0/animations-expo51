@@ -3,7 +3,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 
 import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
+import { useColorScheme } from '@/components/FromTemplate/useColorScheme';
 import MotiIcon from '@/components/TopTabs/MotiIcon';
 import { MotiView } from 'moti';
 import { LinearTransition } from 'react-native-reanimated';

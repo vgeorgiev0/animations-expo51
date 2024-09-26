@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { View } from '../Themed';
+import { View } from '../FromTemplate/Themed';
 import TickerList from './TickerList';
 import Tick from './Tick';
 import { useState } from 'react';

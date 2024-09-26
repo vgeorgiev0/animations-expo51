@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import React from 'react';
 import Tick from './Tick';
-import { View } from '../Themed';
+import { View } from '../FromTemplate/Themed';
 import { MotiView } from 'moti';
 
 interface TickerListProps {

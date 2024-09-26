@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { TextProps } from '../Themed';
+import { TextProps } from '../FromTemplate/Themed';
 
 interface TickProps extends TextProps {
   fontSize: number;
