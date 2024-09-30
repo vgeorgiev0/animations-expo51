@@ -56,6 +56,13 @@ export default function TabLayout() {
           title: 'Phone Ring',
         }}
       />
+      <Drawer.Screen
+        name='loading'
+        options={{
+          drawerLabel: 'Loading',
+          title: 'Loading with Skia',
+        }}
+      />
     </Drawer>
   );
 }
