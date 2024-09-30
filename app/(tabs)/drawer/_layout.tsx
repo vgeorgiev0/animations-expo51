@@ -63,6 +63,13 @@ export default function TabLayout() {
           title: 'Loading with Skia',
         }}
       />
+      <Drawer.Screen
+        name='shake'
+        options={{
+          drawerLabel: 'Shake',
+          title: 'Animated Shake',
+        }}
+      />
     </Drawer>
   );
 }
