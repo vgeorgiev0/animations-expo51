@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import React, { useEffect, useMemo } from 'react';
 import {
   BlurMask,
@@ -10,6 +9,8 @@ import {
 } from '@shopify/react-native-skia';
 import Animated, {
   Easing,
+  FadeIn,
+  FadeOut,
   interpolate,
   useAnimatedStyle,
   useDerivedValue,
@@ -20,33 +21,37 @@ import Animated, {
 
 interface ActivityIndicatorProps {
   loading: boolean;
+  size?: number;
 }
 
-const CanvasSize = 120;
-const HalvedCanvasSize = CanvasSize / 2;
-const CircleSize = 64;
-const StrokeWidth = 10;
-const CircleRadius = (CircleSize - StrokeWidth) / 2;
+const ActivityIndicator: React.FC<ActivityIndicatorProps> = ({
+  loading,
+  size = 100,
+}) => {
+  const strokeWidth = 10;
+  const radius = (size - strokeWidth) / 2;
+  const canvasSize = size + 30;
 
-const ActivityIndicator: React.FC<ActivityIndicatorProps> = ({ loading }) => {
-  const circlePath = useMemo(() => {
+  const circle = useMemo(() => {
     const skPath = Skia.Path.Make();
-    skPath.addCircle(HalvedCanvasSize, HalvedCanvasSize, CircleRadius);
+
+    skPath.addCircle(canvasSize / 2, canvasSize / 2, radius);
     return skPath;
-  }, []);
+  }, [canvasSize, radius]);
 
   const progress = useSharedValue(0);
 
   useEffect(() => {
     progress.value = withRepeat(
-      withTiming(1, { duration: 1200, easing: Easing.linear }),
-      -1
+      withTiming(1, { duration: 1000, easing: Easing.linear }),
+      -1,
+      false
     );
-  }, []);
+  }, [progress]);
 
-  const rStyle = useAnimatedStyle(() => {
+  const rContainerStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ rotate: `${progress.value * 2 * Math.PI}rad` }],
+      transform: [{ rotate: `${2 * Math.PI * progress.value}rad` }],
     };
   });
 
@@ -57,24 +62,32 @@ const ActivityIndicator: React.FC<ActivityIndicatorProps> = ({ loading }) => {
   if (!loading) {
     return null;
   }
-
   return (
-    <Animated.View style={rStyle}>
-      <Canvas style={styles.canvasStyle}>
+    <Animated.View
+      entering={FadeIn.duration(1000)}
+      exiting={FadeOut.duration(1000)}
+      style={rContainerStyle}
+    >
+      <Canvas
+        style={{
+          width: canvasSize,
+          height: canvasSize,
+        }}
+      >
         <Path
-          path={circlePath}
-          color={'white'}
-          style={'stroke'}
-          strokeWidth={StrokeWidth}
-          strokeCap={'round'}
+          path={circle}
+          color='red'
+          style='stroke'
+          strokeWidth={strokeWidth}
           start={startAnimated}
           end={1}
+          strokeCap={'round'}
         >
           <SweepGradient
-            c={vec(HalvedCanvasSize, HalvedCanvasSize)}
+            c={vec(canvasSize / 2, canvasSize / 2)}
             colors={['cyan', 'magenta', 'yellow', 'cyan']}
           />
-          <BlurMask blur={5} style={'solid'} />
+          <BlurMask blur={5} style='solid' />
         </Path>
       </Canvas>
     </Animated.View>
@@ -82,10 +95,3 @@ const ActivityIndicator: React.FC<ActivityIndicatorProps> = ({ loading }) => {
 };
 
 export default ActivityIndicator;
-
-const styles = StyleSheet.create({
-  canvasStyle: {
-    width: CanvasSize,
-    height: CanvasSize,
-  },
-});
