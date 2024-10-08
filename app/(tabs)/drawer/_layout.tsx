@@ -70,6 +70,13 @@ export default function TabLayout() {
           title: 'Animated Shake',
         }}
       />
+      <Drawer.Screen
+        name='stacked-cards'
+        options={{
+          drawerLabel: 'Stacked Cards',
+          title: 'Stacked Cards',
+        }}
+      />
     </Drawer>
   );
 }
