@@ -1,11 +1,6 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
 
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/FromTemplate/useColorScheme';
-import { useClientOnlyValue } from '@/components/FromTemplate/useClientOnlyValue';
 import { Drawer } from 'expo-router/drawer';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -17,8 +12,6 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Drawer>
       <Drawer.Screen
@@ -75,6 +68,13 @@ export default function TabLayout() {
         options={{
           drawerLabel: 'Stacked Cards',
           title: 'Stacked Cards',
+        }}
+      />
+      <Drawer.Screen
+        name='shared-element'
+        options={{
+          drawerLabel: 'Shared Element',
+          headerShown: false,
         }}
       />
     </Drawer>
