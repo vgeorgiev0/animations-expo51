@@ -1,15 +1,5 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-
 import { Drawer } from 'expo-router/drawer';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
 
 export default function TabLayout() {
   return (
@@ -74,6 +64,13 @@ export default function TabLayout() {
         name='shared-element'
         options={{
           drawerLabel: 'Shared Element',
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name='carousel'
+        options={{
+          drawerLabel: 'Carousel',
           headerShown: false,
         }}
       />
