@@ -7,6 +7,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import { useState } from 'react';
+import { useSegments } from 'expo-router';
 
 const TabBar: React.FC<BottomTabBarProps> = ({
   state,
@@ -14,6 +15,8 @@ const TabBar: React.FC<BottomTabBarProps> = ({
   navigation,
 }) => {
   const [dimensions, setDimensions] = useState({ width: 100, height: 20 });
+
+const segments = useSegments();
 
   const buttonWidth = dimensions.width / state.routes.length;
 
@@ -33,7 +36,13 @@ const TabBar: React.FC<BottomTabBarProps> = ({
   });
 
   return (
-    <View onLayout={onTabBarLayout} style={styles.tabBar}>
+    <View
+      onLayout={onTabBarLayout}
+      style={[
+        styles.tabBar,
+        { display: segments[2] === 'carousel-with-thumb' ? 'none' : 'flex' },
+      ]}
+    >
       <Animated.View
         style={[
           {
