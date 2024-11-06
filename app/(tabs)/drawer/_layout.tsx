@@ -3,7 +3,11 @@ import { Drawer } from 'expo-router/drawer';
 
 export default function TabLayout() {
   return (
-    <Drawer>
+    <Drawer
+      screenOptions={{
+        unmountOnBlur: true,
+      }}
+    >
       <Drawer.Screen
         name='index' // This is the name of the page and must match the url from root
         options={{

@@ -40,7 +40,9 @@ const segments = useSegments();
       onLayout={onTabBarLayout}
       style={[
         styles.tabBar,
-        { display: segments[2] === 'carousel-with-thumb' ? 'none' : 'flex' },
+        {
+          display: segments[2] !== undefined ? 'none' : 'flex',
+        },
       ]}
     >
       <Animated.View
