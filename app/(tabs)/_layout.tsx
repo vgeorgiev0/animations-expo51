@@ -7,6 +7,7 @@ import { useColorScheme } from '@/components/FromTemplate/useColorScheme';
 import MotiIcon from '@/components/TopTabs/MotiIcon';
 import { MotiView } from 'moti';
 import { LinearTransition } from 'react-native-reanimated';
+import TabBar from '@/components/TabBar/TabBar';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -27,11 +28,12 @@ export default function TabLayout() {
         // to prevent a hydration error in React Navigation v6.
         headerShown: false,
       }}
+      tabBar={(props) => <TabBar {...props} />}
     >
       <Tabs.Screen
         name='index'
         options={{
-          title: 'Tab One',
+          title: 'Home',
           tabBarIcon: ({ color, focused }) => {
             return (
               <MotiView
@@ -52,7 +54,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name='drawer'
         options={{
-          title: 'Drawer',
+          title: 'Explore',
           tabBarIcon: ({ color, focused }) => {
             return (
               <MotiView
