@@ -1,17 +1,24 @@
 import React from 'react';
-import { Stack, useGlobalSearchParams } from 'expo-router';
-import { DrawerToggleButton } from '@react-navigation/drawer';
+import { Stack, useGlobalSearchParams, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
+// Not working properly
 const SharedElementStackLayout = ({}) => {
   const params = useGlobalSearchParams();
-
+  const router = useRouter();
   return (
-    <Stack screenOptions={{}}>
+    <Stack>
       <Stack.Screen
         name='index'
         options={{
           title: 'Shared Element',
-          headerLeft: () => <DrawerToggleButton />,
+          headerLeft: () => (
+            <Ionicons
+              name='arrow-back'
+              size={26}
+              onPress={() => router.push('/')}
+            />
+          ),
         }}
       />
       <Stack.Screen

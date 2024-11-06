@@ -65,13 +65,6 @@ export default function TabLayout() {
         }}
       />
       <Drawer.Screen
-        name='shared-element'
-        options={{
-          drawerLabel: 'Shared Element',
-          headerShown: false,
-        }}
-      />
-      <Drawer.Screen
         name='carousel'
         options={{
           drawerLabel: 'Carousel',

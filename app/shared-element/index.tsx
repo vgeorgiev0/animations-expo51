@@ -32,7 +32,7 @@ export type Tag = keyof typeof gallery;
 const SharedElementScreen: React.FC<SharedElementScreenProps> = ({}) => {
   const chips = ['Italy', 'Tourism', 'Nature'];
   const goToDetails = (tag: Tag) => {
-    router.navigate(`/(tabs)/drawer/shared-element/${tag}`);
+    router.navigate(`/shared-element/${tag}`);
   };
 
   const { width } = Dimensions.get('screen');

@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Text, View } from '@/components/FromTemplate/Themed';
+import { Link } from 'expo-router';
 
 export default function TabTwoScreen() {
   return (
