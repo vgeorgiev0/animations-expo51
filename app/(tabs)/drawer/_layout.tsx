@@ -74,6 +74,13 @@ export default function TabLayout() {
           headerShown: false,
         }}
       />
+      <Drawer.Screen
+        name='carousel-with-thumb'
+        options={{
+          drawerLabel: 'Carousel With Thumb',
+          headerShown: false,
+        }}
+      />
     </Drawer>
   );
 }

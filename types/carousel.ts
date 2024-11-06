@@ -27,3 +27,8 @@ export type Photo = {
   liked: boolean;
   alt: string;
 };
+
+export enum CarouselImageVariant {
+  ROUNDED = 'rounded',
+  SQUARE = 'square',
+}

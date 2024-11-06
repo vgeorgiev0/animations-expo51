@@ -3,7 +3,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SearchPayload } from '@/types/carousel';
 import PhotoItem from './PhotoItem';
-import { _imageWidth, _spacing, width } from '@/constants';
+import { _imageWidth, _spacing, uri, width } from '@/constants';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -11,9 +11,6 @@ import Animated, {
 import BackdropPhoto from './BackdropPhoto';
 
 interface PexelsWallpapersProps {}
-// PEXELS API
-const uri =
-  'https://api.pexels.com/v1/search?query=mobile wallpaper&orientation=portrait';
 
 const PexelsWallpapers: React.FC<PexelsWallpapersProps> = ({}) => {
   const scrollX = useSharedValue(0);
