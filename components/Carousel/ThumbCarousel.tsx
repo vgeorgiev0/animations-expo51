@@ -117,6 +117,7 @@ const ThumbCarousel: React.FC<ThumbCarouselProps> = ({}) => {
             renderItem={({ item, index }) => {
               return (
                 <PhotoItem
+                  zoomable
                   imageWidth={width}
                   index={index}
                   item={item}

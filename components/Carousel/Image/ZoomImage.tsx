@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 import React, { useRef, useState } from 'react';
 import ImageZoom from './ImageZoom';
 import { height, width } from '@/constants';
@@ -16,6 +17,7 @@ interface ZoomImageProps {
   maxScale?: number;
   style?: ImageZoomProps['style'];
   item: Photo;
+  resizeMode?: ImageZoomProps['resizeMode'];
 }
 
 const ZoomImage: React.FC<ZoomImageProps> = ({
@@ -23,6 +25,7 @@ const ZoomImage: React.FC<ZoomImageProps> = ({
   item,
   maxScale,
   style,
+  resizeMode = 'contain',
 }) => {
   const [isZoomed, setIsZoomed] = useState(false);
   const ref = useRef<ImageZoomRef>(null);
@@ -74,7 +77,7 @@ const ZoomImage: React.FC<ZoomImageProps> = ({
       onResetAnimationEnd={(finished, values) => {
         onAnimationEnd(finished);
       }}
-      resizeMode='contain'
+      resizeMode={resizeMode}
     />
   );
 };

@@ -7,6 +7,7 @@ import Animated, {
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
+import ZoomImage from './ZoomImage';
 
 interface PhotoProps {
   item: Photo;
@@ -14,6 +15,7 @@ interface PhotoProps {
   scrollX: SharedValue<number>;
   imageWidth?: number;
   variant?: CarouselImageVariant;
+  zoomable?: boolean;
 }
 
 const PhotoItem: React.FC<PhotoProps> = ({
@@ -22,10 +24,10 @@ const PhotoItem: React.FC<PhotoProps> = ({
   scrollX,
   imageWidth = _imageWidth,
   variant = CarouselImageVariant.ROUNDED,
+  zoomable,
 }) => {
   const animatedStyles = useAnimatedStyle(() => {
     return {
-      opacity: 1,
       transform: [
         {
           scale: interpolate(
@@ -53,10 +55,22 @@ const PhotoItem: React.FC<PhotoProps> = ({
         variant === CarouselImageVariant.ROUNDED && styles.rounded,
       ]}
     >
-      <Animated.Image
-        style={[styles.image, animatedStyles]}
-        source={{ uri: item.src.original }}
-      />
+      {zoomable ? (
+        <ZoomImage
+          style={[
+            animatedStyles,
+            { height: _imageHeight },
+            variant === CarouselImageVariant.ROUNDED && styles.rounded,
+          ]}
+          // resizeMode={'cover'}
+          item={item}
+        />
+      ) : (
+        <Animated.Image
+          style={[styles.image, animatedStyles]}
+          source={{ uri: item.src.original }}
+        />
+      )}
     </View>
   );
 };
