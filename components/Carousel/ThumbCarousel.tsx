@@ -2,7 +2,7 @@ import { FlatList, Platform, StyleSheet, View } from 'react-native';
 import React, { useCallback, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { CarouselImageVariant, Photo, SearchPayload } from '@/types/carousel';
-import PhotoItem from './PhotoItem';
+import PhotoItem from './Image/PhotoItem';
 import {
   _imageListSpacing,
   _smallImageSize,
@@ -14,11 +14,11 @@ import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
-import BackdropPhoto from './BackdropPhoto';
+import BackdropPhoto from './Image/BackdropPhoto';
 import { useLocalSearchParams } from 'expo-router';
 import { DrawerToggleButton } from '@react-navigation/drawer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import SmallPhotoItem from './SmallPhotoItem';
+import SmallPhotoItem from './Image/SmallPhotoItem';
 import ActivityIndicator from '../ActivityIndicator';
 
 interface ThumbCarouselProps {}

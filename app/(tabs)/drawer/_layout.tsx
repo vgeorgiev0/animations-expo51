@@ -78,6 +78,13 @@ export default function TabLayout() {
           headerShown: false,
         }}
       />
+      <Drawer.Screen
+        name='pinch-zoom'
+        options={{
+          drawerLabel: 'Pinch Zoom',
+          headerShown: false,
+        }}
+      />
     </Drawer>
   );
 }

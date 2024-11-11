@@ -2,21 +2,21 @@ import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SearchPayload } from '@/types/carousel';
-import PhotoItem from './Image/PhotoItem';
-import { _imageWidth, _spacing, uri, width } from '@/constants';
+import { uri, width } from '@/constants';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
 import BackdropPhoto from './Image/BackdropPhoto';
+import ZoomImage from './Image/ZoomImage';
 
-interface PexelsWallpapersProps {}
+interface WithZoomProps {}
 
-const PexelsWallpapers: React.FC<PexelsWallpapersProps> = ({}) => {
+const WithZoom: React.FC<WithZoomProps> = ({}) => {
   const scrollX = useSharedValue(0);
 
   const onScroll = useAnimatedScrollHandler((event) => {
-    scrollX.value = event.contentOffset.x / (_imageWidth + _spacing);
+    scrollX.value = event.contentOffset.x / width;
   });
 
   const { data } = useQuery<SearchPayload>({
@@ -47,28 +47,25 @@ const PexelsWallpapers: React.FC<PexelsWallpapersProps> = ({}) => {
         })}
       </View>
       <Animated.FlatList
+        pinchGestureEnabled
         onScroll={onScroll}
         scrollEventThrottle={1000 / 60} // 16.6ms
         data={data?.photos}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item, index }) => {
-          return <PhotoItem index={index} item={item} scrollX={scrollX} />;
+          return <ZoomImage item={item} />;
         }}
         showsHorizontalScrollIndicator={false}
         horizontal
         style={{ flexGrow: 0 }}
-        snapToInterval={_imageWidth + _spacing}
+        snapToInterval={width}
         decelerationRate={'fast'}
-        contentContainerStyle={{
-          gap: _spacing,
-          paddingHorizontal: (width - _imageWidth) / 2,
-        }}
       />
     </>
   );
 };
 
-export default PexelsWallpapers;
+export default WithZoom;
 
 const styles = StyleSheet.create({
   backgroundImageContainer: {
