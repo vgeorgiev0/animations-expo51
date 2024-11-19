@@ -85,6 +85,13 @@ export default function TabLayout() {
           headerShown: false,
         }}
       />
+      <Drawer.Screen
+        name='drag-and-drop-list'
+        options={{
+          drawerLabel: 'Drag and Drop List',
+          headerShown: false,
+        }}
+      />
     </Drawer>
   );
 }
