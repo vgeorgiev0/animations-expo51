@@ -12,9 +12,9 @@ const DNDHeader: React.FC<DNDHeaderProps> = ({ onPress, title, withSwipe }) => {
   return (
     <View style={styles.header}>
       <Text style={styles.title}>{title}</Text>
-      <TouchableOpacity onPress={onPress}>
+      {/* <TouchableOpacity onPress={onPress}>
         <Ionicons name={withSwipe ? 'close' : 'add'} size={32} color='grey' />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
@@ -25,14 +25,15 @@ const styles = StyleSheet.create({
   header: {
     height: 65,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
     paddingHorizontal: '5%',
     borderBottomWidth: 1,
     borderBottomColor: 'lightgrey',
   },
   title: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: 'semibold',
+    color: 'grey',
   },
 });

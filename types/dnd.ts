@@ -21,3 +21,13 @@ export interface UpdatedDragAndDropListDataItem {
 }
 
 export type NullableNumber = number | null;
+
+
+
+export interface Item  {
+  key: string;
+  label?: string;
+  height?: number;
+  sectionTitle?: string;
+  isSection?: boolean;
+};

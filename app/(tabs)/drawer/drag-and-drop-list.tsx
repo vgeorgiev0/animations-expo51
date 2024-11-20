@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import AnimatedDNDList from '@/components/DND/AnimatedDNDList';
 import { dragAndDropListData } from '@/data/DRAG_AND_DROP_LIST_DATA';
@@ -9,6 +9,9 @@ import { NullableNumber, UpdatedDragAndDropListDataItem } from '@/types/dnd';
 import { getDNDInitialPositions } from '@/utils/getDNDInitialPositions';
 import { useSharedValue } from 'react-native-reanimated';
 import Example from '@/components/DND/Dep';
+import { DrawerToggleButton } from '@react-navigation/drawer';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { _spacing } from '@/constants';
 
 interface DragAndDropScreenProps {}
 
@@ -22,24 +25,29 @@ const DragAndDropScreen: React.FC<DragAndDropScreenProps> = ({}) => {
   const isDragging = useSharedValue<0 | 1>(0);
   const draggedItemId = useSharedValue<NullableNumber>(null);
 
+  const { left, top } = useSafeAreaInsets();
+
   return (
     <GestureHandlerRootView style={styles.container}>
+      <View
+        style={{
+          position: 'absolute',
+          top: top + _spacing,
+          left: left + _spacing,
+        }}
+      >
+        <DrawerToggleButton />
+      </View>
+
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar backgroundColor='white' style='dark' />
         <DNDHeader
           onPress={() => {
             setStart(!start);
           }}
-          title='Market trends'
+          title='Drag and drop with scroll'
           withSwipe={start}
         />
-        {/* <AnimatedDNDList
-          draggedItemId={draggedItemId}
-          isDragging={isDragging}
-          currentItemPosition={currentItemPosition}
-          isStart={start}
-          data={dragAndDropListData}
-        /> */}
         <Example />
       </SafeAreaView>
     </GestureHandlerRootView>
