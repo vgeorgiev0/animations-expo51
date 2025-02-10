@@ -92,6 +92,13 @@ export default function TabLayout() {
           headerShown: false,
         }}
       />
+      <Drawer.Screen
+        name='schedule-animation'
+        options={{
+          drawerLabel: 'Schedule Animation',
+          headerShown: false,
+        }}
+      />
     </Drawer>
   );
 }
