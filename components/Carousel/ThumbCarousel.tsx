@@ -1,4 +1,4 @@
-import { FlatList, Platform, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import React, { useCallback, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { CarouselImageVariant, Photo, SearchPayload } from '@/types/carousel';
@@ -20,6 +20,8 @@ import { DrawerToggleButton } from '@react-navigation/drawer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SmallPhotoItem from './Image/SmallPhotoItem';
 import ActivityIndicator from '../ActivityIndicator';
+import { Ionicons } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface ThumbCarouselProps {}
 
@@ -35,7 +37,7 @@ const ThumbCarousel: React.FC<ThumbCarouselProps> = ({}) => {
   const topListRef = useRef<FlatList>(null);
   const thumbListRef = useRef<FlatList>(null);
 
-  const { top, left, bottom } = useSafeAreaInsets();
+  const { top, left, bottom, right } = useSafeAreaInsets();
 
   const scrollToActiveIndex = useCallback(
     (index: number) => {
@@ -80,6 +82,20 @@ const ThumbCarousel: React.FC<ThumbCarouselProps> = ({}) => {
       return res;
     },
   });
+  const [modifiedData, setModifiedData] = useState<SearchPayload | undefined>(
+    data
+  );
+
+  const handleDelete = () => {
+    const photoIdByIndex = modifiedData?.photos[activeImageIndex].id;
+    setModifiedData((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        photos: prev.photos.filter((photo) => photo.id !== photoIdByIndex),
+      };
+    });
+  };
 
   return (
     <>
@@ -96,8 +112,19 @@ const ThumbCarousel: React.FC<ThumbCarouselProps> = ({}) => {
           >
             <DrawerToggleButton />
           </View>
+          <View
+            style={{
+              position: 'absolute',
+              top: top + _spacing,
+              right: right + _spacing,
+            }}
+          >
+            <TouchableOpacity onPress={handleDelete}>
+              <Ionicons name='trash-bin-sharp' size={24} color={'tomato'} />
+            </TouchableOpacity>
+          </View>
           <View style={styles.backgroundImageContainer}>
-            {data?.photos.map((photo, index) => {
+            {modifiedData?.photos.map((photo, index) => {
               return (
                 <BackdropPhoto
                   key={`${index}-${photo.id}`}
@@ -112,7 +139,7 @@ const ThumbCarousel: React.FC<ThumbCarouselProps> = ({}) => {
             ref={topListRef}
             onScroll={onScroll}
             scrollEventThrottle={1000 / 60} // 16.6ms
-            data={data?.photos}
+            data={modifiedData?.photos}
             keyExtractor={(item) => String(item.id)}
             renderItem={({ item, index }) => {
               return (
@@ -153,10 +180,11 @@ const ThumbCarousel: React.FC<ThumbCarouselProps> = ({}) => {
               );
             }}
             onEndReached={() => {
-              Platform.OS === 'android' &&
-                scrollToActiveIndex(
-                  data?.photos?.length ? data.photos.length - 1 : 0
-                );
+              scrollToActiveIndex(
+                modifiedData?.photos?.length
+                  ? modifiedData.photos.length - 1
+                  : 0
+              );
             }}
             pagingEnabled
             style={{ flexGrow: 0 }}
@@ -174,7 +202,7 @@ const ThumbCarousel: React.FC<ThumbCarouselProps> = ({}) => {
                 styles.thumbContainer,
               ]}
               style={styles.bottomList}
-              data={data?.photos}
+              data={modifiedData?.photos}
               keyExtractor={(item) => item.id.toString()}
               decelerationRate={'fast'}
               renderItem={({ item, index }: { item: Photo; index: number }) => {
